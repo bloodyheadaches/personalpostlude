@@ -2,29 +2,86 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Túneles Cloudflare Activos</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    background: #0d0d0f;
+    background: linear-gradient(135deg, #0d0d0f 0%, #1a1a2e 100%);
     color: #e0e0e0;
     font-family: "JetBrains Mono", monospace;
-    font-size: 18px;
+    font-size: 16px;
     padding: 2rem;
+    min-height: 100vh;
   }
-  h1 { color: #a1c4fd; text-align: center; }
-  li { margin: 1rem 0; list-style: none; }
-  a { color: #89f7fe; text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 { 
+    color: #a1c4fd; 
+    text-align: center; 
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+  }
+  .timestamp {
+    text-align: center;
+    color: #888;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+  }
+  ul {
+    list-style: none;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+  }
+  li { 
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border-left: 4px solid #89f7fe;
+    transition: all 0.3s ease;
+  }
+  li:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
+  }
+  strong {
+    color: #a1c4fd;
+    display: inline-block;
+    min-width: 150px;
+  }
+  a { 
+    color: #89f7fe; 
+    text-decoration: none;
+    word-break: break-all;
+  }
+  a:hover { 
+    text-decoration: underline;
+    color: #62d9e7;
+  }
+  .error {
+    color: #ff6b6b;
+    border-left-color: #ff6b6b;
+  }
 </style>
 </head>
 <body>
-  <h1>Túneles Activos</h1>
-  <ul>
-<li><strong>Terminal:</strong> <a href="🟢 Túnel activo (URL no disponible)">🟢 Túnel activo (URL no disponible)</a></li>
-<li><strong>SM:</strong> <a href="🟢 Túnel activo (URL no disponible)">🟢 Túnel activo (URL no disponible)</a></li>
-<li><strong>Index:</strong> <a href="🟢 Túnel activo (URL no disponible)">🟢 Túnel activo (URL no disponible)</a></li>
-<li><strong>Code Server:</strong> <a href="🟢 Túnel activo (URL no disponible)">🟢 Túnel activo (URL no disponible)</a></li>
-<li><strong>Music Manager:</strong> <a href="🟢 Túnel activo (URL no disponible)">🟢 Túnel activo (URL no disponible)</a></li>
-<li><strong>Immich:</strong> <a href="🟢 Túnel activo (URL no disponible)">🟢 Túnel activo (URL no disponible)</a></li>
-</ul></body></html>
+  <div class="container">
+    <h1>🌐 Túneles Activos</h1>
+    <div class="timestamp">Última actualización: 2025-10-26 01:02:03</div>
+    <ul>
+<li class="error"><strong>SM:</strong> ❌ Error: URL no generada</li>
+<li class="error"><strong>Index:</strong> ❌ Error: URL no generada</li>
+<li class="error"><strong>Immich:</strong> ❌ Error: URL no generada</li>
+<li class="error"><strong>Code Server:</strong> ❌ Error: URL no generada</li>
+<li class="error"><strong>Music Manager:</strong> ❌ Error: URL no generada</li>
+<li class="error"><strong>Terminal:</strong> ❌ Error: URL no generada</li>
+    </ul>
+  </div>
+</body>
+</html>
