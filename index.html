@@ -3,85 +3,190 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Túneles Cloudflare Activos</title>
+<title>Hub de Servicios</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  
   body {
     background: linear-gradient(135deg, #0d0d0f 0%, #1a1a2e 100%);
     color: #e0e0e0;
     font-family: "JetBrains Mono", monospace;
-    font-size: 16px;
     padding: 2rem;
     min-height: 100vh;
   }
+  
   .container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
   }
+  
   h1 { 
     color: #a1c4fd; 
     text-align: center; 
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
-  }
-  .timestamp {
-    text-align: center;
-    color: #888;
     margin-bottom: 2rem;
-    font-size: 0.9rem;
+    font-size: 2.5rem;
+    text-shadow: 0 0 20px rgba(161, 196, 253, 0.3);
   }
-  ul {
-    list-style: none;
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .service-card {
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 2rem;
+    border-radius: 20px;
+    padding: 2.5rem;
     backdrop-filter: blur(10px);
-  }
-  li { 
-    margin: 1.5rem 0;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 8px;
-    border-left: 4px solid #89f7fe;
+    border: 2px solid transparent;
     transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
   }
-  li:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateX(5px);
+  
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(161, 196, 253, 0.1) 0%, rgba(137, 247, 254, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
-  strong {
+  
+  .service-card:hover {
+    border-color: #89f7fe;
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(137, 247, 254, 0.4);
+  }
+  
+  .service-card:hover::before {
+    opacity: 1;
+  }
+  
+  .service-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 10px rgba(161, 196, 253, 0.5));
+  }
+  
+  .service-name {
+    font-size: 1.8rem;
     color: #a1c4fd;
-    display: inline-block;
-    min-width: 150px;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
   }
-  a { 
-    color: #89f7fe; 
-    text-decoration: none;
-    word-break: break-all;
+  
+  .service-meta {
+    color: #666;
+    font-size: 0.75rem;
+    position: relative;
+    z-index: 1;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
   }
-  a:hover { 
-    text-decoration: underline;
-    color: #62d9e7;
+  
+  .service-card:hover .service-meta {
+    opacity: 1;
   }
-  .error {
-    color: #ff6b6b;
-    border-left-color: #ff6b6b;
+  
+  .status-indicator {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 15px #4ade80;
+    animation: pulse 2s infinite;
+    z-index: 2;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.1); }
+  }
+  
+  .offline {
+    background: #666;
+    box-shadow: 0 0 10px #666;
+  }
+  
+  .footer {
+    text-align: center;
+    margin-top: 4rem;
+    color: #555;
+    font-size: 0.75rem;
+  }
+  
+  .server-info {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #666;
+    font-size: 0.85rem;
   }
 </style>
 </head>
 <body>
   <div class="container">
-    <h1>🌐 Túneles Activos</h1>
-    <div class="timestamp">Última actualización: 2025-10-26 01:06:42</div>
-    <ul>
-<li class="error"><strong>SM:</strong> ❌ Error de túnel</li>
-<li class="error"><strong>Index:</strong> ❌ Error de túnel</li>
-<li class="error"><strong>Immich:</strong> ❌ Error de túnel</li>
-<li class="error"><strong>Code Server:</strong> ❌ Error de túnel</li>
-<li class="error"><strong>Music Manager:</strong> ❌ Error de túnel</li>
-<li class="error"><strong>Terminal:</strong> ❌ Error de túnel</li>
-    </ul>
+    <h1>🌐 Services Hub</h1>
+    <div class="server-info">Server: 192.168.1.12</div>
+    
+    <div class="services-grid">
+      <div class="service-card" onclick="window.open('http://192.168.1.12:1970', '_blank')">
+        <div class="status-indicator "></div>
+        <div class="service-icon">🎯</div>
+        <div class="service-name">SM</div>
+        <div class="service-meta">:1970</div>
+      </div>
+      <div class="service-card" onclick="window.open('http://192.168.1.12:5005', '_blank')">
+        <div class="status-indicator "></div>
+        <div class="service-icon">🏠</div>
+        <div class="service-name">Index</div>
+        <div class="service-meta">:5005</div>
+      </div>
+      <div class="service-card" onclick="window.open('http://192.168.1.12:2283', '_blank')">
+        <div class="status-indicator "></div>
+        <div class="service-icon">📸</div>
+        <div class="service-name">Immich</div>
+        <div class="service-meta">:2283</div>
+      </div>
+      <div class="service-card" onclick="window.open('http://192.168.1.12:8081', '_blank')">
+        <div class="status-indicator "></div>
+        <div class="service-icon">💻</div>
+        <div class="service-name">Code Server</div>
+        <div class="service-meta">:8081</div>
+      </div>
+      <div class="service-card" onclick="window.open('http://192.168.1.12:10180', '_blank')">
+        <div class="status-indicator "></div>
+        <div class="service-icon">🎵</div>
+        <div class="service-name">Music Manager</div>
+        <div class="service-meta">:10180</div>
+      </div>
+      <div class="service-card" onclick="window.open('http://192.168.1.12:2222', '_blank')">
+        <div class="status-indicator "></div>
+        <div class="service-icon">⚡</div>
+        <div class="service-name">Terminal</div>
+        <div class="service-meta">:2222</div>
+      </div>
+
+    </div>
+    
+    <div class="footer">
+      Updated: 2025-10-26 01:16:43
+    </div>
   </div>
 </body>
 </html>
